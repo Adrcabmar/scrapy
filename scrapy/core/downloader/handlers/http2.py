@@ -48,7 +48,7 @@ class H2DownloadHandler:
         self._pool.close_connections()
 
 
-class ScrapyH2Agent:
+class scrapy_h2_agent:
     _Agent = H2Agent
     _ProxyAgent = ScrapyProxyH2Agent
 

@@ -41,7 +41,7 @@ from scrapy.utils.httpobj import urlparse_cached
 from scrapy.utils.python import to_bytes
 
 
-class ReceivedDataProtocol(Protocol):
+class received_data_protocol(Protocol):
     def __init__(self, filename=None):
         self.__filename = filename
         self.body = open(filename, "wb") if filename else BytesIO()
@@ -62,7 +62,7 @@ class ReceivedDataProtocol(Protocol):
 _CODE_RE = re.compile(r"\d+")
 
 
-class FTPDownloadHandler:
+class ftp_downloadHandler:
     lazy = False
 
     CODE_MAPPING = {

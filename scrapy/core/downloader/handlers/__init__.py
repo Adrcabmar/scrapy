@@ -13,7 +13,7 @@ from scrapy.utils.python import without_none_values
 logger = logging.getLogger(__name__)
 
 
-class DownloadHandlers:
+class download_handlers:
     def __init__(self, crawler):
         self._crawler = crawler
         self._schemes = {}  # stores acceptable schemes on instancing

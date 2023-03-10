@@ -35,7 +35,7 @@ from scrapy.utils.python import to_bytes, to_unicode
 logger = logging.getLogger(__name__)
 
 
-class HTTP11DownloadHandler:
+class http_11_download_handler:
     lazy = False
 
     def __init__(self, settings, crawler=None):
@@ -94,11 +94,11 @@ class HTTP11DownloadHandler:
         return d
 
 
-class TunnelError(Exception):
+class tunnel_error(Exception):
     """An HTTP CONNECT tunnel could not be established by the proxy."""
 
 
-class TunnelingTCP4ClientEndpoint(TCP4ClientEndpoint):
+class tunneling_tpc4_client_endpoint(TCP4ClientEndpoint):
     """An endpoint that tunnels through proxies to allow HTTPS downloads. To
     accomplish that, this endpoint sends an HTTP CONNECT to the proxy.
     The HTTP CONNECT is always sent when using this endpoint, I think this could
@@ -131,7 +131,7 @@ class TunnelingTCP4ClientEndpoint(TCP4ClientEndpoint):
         self._contextFactory = contextFactory
         self._connectBuffer = bytearray()
 
-    def requestTunnel(self, protocol):
+    def request_tunnel(self, protocol):
         """Asks the proxy to open a tunnel."""
         tunnelReq = tunnel_request_data(
             self._tunneledHost, self._tunneledPort, self._proxyAuthHeader
@@ -142,7 +142,7 @@ class TunnelingTCP4ClientEndpoint(TCP4ClientEndpoint):
         self._protocol = protocol
         return protocol
 
-    def processProxyResponse(self, rcvd_bytes):
+    def process_proxy_response(self, rcvd_bytes):
         """Processes the response from the proxy. If the tunnel is successfully
         created, notifies the client that we are ready to send requests. If not
         raises a TunnelError.
@@ -179,7 +179,7 @@ class TunnelingTCP4ClientEndpoint(TCP4ClientEndpoint):
                 )
             )
 
-    def connectFailed(self, reason):
+    def connect_failed(self, reason):
         """Propagates the errback to the appropriate deferred."""
         self._tunnelReadyDeferred.errback(reason)
 
@@ -212,7 +212,7 @@ def tunnel_request_data(host, port, proxy_auth_header=None):
     return tunnel_req
 
 
-class TunnelingAgent(Agent):
+class tunneling_agent(Agent):
     """An agent that uses a L{TunnelingTCP4ClientEndpoint} to make HTTPS
     downloads. It may look strange that we have chosen to subclass Agent and not
     ProxyAgent but consider that after the tunnel is opened the proxy is
@@ -262,7 +262,7 @@ class TunnelingAgent(Agent):
         )
 
 
-class ScrapyProxyAgent(Agent):
+class scrapy_proxy_agent(Agent):
     def __init__(
         self, reactor, proxyURI, connectTimeout=None, bindAddress=None, pool=None
     ):
@@ -291,7 +291,7 @@ class ScrapyProxyAgent(Agent):
         )
 
 
-class ScrapyAgent:
+class scrapy_agent:
     _Agent = Agent
     _ProxyAgent = ScrapyProxyAgent
     _TunnelingAgent = TunnelingAgent
