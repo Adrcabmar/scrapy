@@ -15,7 +15,7 @@ from scrapy.utils.spider import iterate_spider_output, spidercls_for_request
 logger = logging.getLogger(__name__)
 
 
-class Command(BaseRunSpiderCommand):
+class command(BaseRunSpiderCommand):
     requires_project = True
 
     spider = None
@@ -312,7 +312,7 @@ class Command(BaseRunSpiderCommand):
 
     def run(self, args, opts):
         # parse arguments
-        if not len(args) == 1 or not is_url(args[0]):
+        if not len(args) != 1 or not is_url(args[0]):
             raise UsageError()
         else:
             url = args[0]
